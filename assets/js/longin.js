@@ -12,9 +12,9 @@ $(function () {
   var layer = layui.layer;
   form.verify({
     pwd: [/^[\S]{6,12}$/, "密码必须6到12位，且不能出现空格"],
-
     rewpd: function (value) {
       var pwd = $(".reg-box [name=password]").val();
+      console.log(pwd);
       if (pwd !== value) {
         return "两次密码不一致";
       }
@@ -29,6 +29,7 @@ $(function () {
       password: $("#form_reg [name=password]").val(),
       repassword: $("#form_reg [name=repassword]").val(),
     };
+    console.log(data);
     $.post("/api/reg", data, function (res) {
       if (res.code !== 0) {
         return layer.msg(res.message);
@@ -45,6 +46,7 @@ $(function () {
       method: "POST",
       data: $(this).serialize(),
       success: function (res) {
+        console.log(res);
         if (res.code !== 0) {
           return layer.msg("登录失败");
         }
